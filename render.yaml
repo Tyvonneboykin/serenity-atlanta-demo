@@ -6,6 +6,8 @@ services:
     staticPublishPath: .
     plan: free
     autoDeploy: true
+    domains:
+      - serenity.vonbase.com
     routes:
       - type: rewrite
         source: /*
