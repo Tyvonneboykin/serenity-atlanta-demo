@@ -16,7 +16,7 @@
     
     <p><strong>Test Phone:</strong> 404-555-TEST</p>
     <p><strong>Target Emails:</strong> donvon@vonbase.com & support@vonbase.com</p>
-    <p><strong>Service:</strong> SMTP2GO Direct API</p>
+    <p><strong>Service:</strong> Web3Forms Direct API</p>
     
     <button class="button" onclick="testEmailCapture()">🧪 Send Test Email</button>
     
@@ -35,7 +35,7 @@
                     'Content-Type': 'application/json',
                 },
                 body: JSON.stringify({
-                    "api_key": "api-F7FC4178E29740E0878A2922145140F4",
+                    "api_key": "YOUR_WEB3FORMS_ACCESS_KEY",
                     "to": ["donvon@vonbase.com", "support@vonbase.com"],
                     "sender": "donvon@vonbase.com",
                     "subject": `🧪 TEST: Serenity Customer: ${testPhone}`,
