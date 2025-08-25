@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>🧪 Serenity Email Test</title>
+    <style>
+        body { font-family: Arial, sans-serif; max-width: 600px; margin: 50px auto; padding: 20px; }
+        .button { background: #4CAF50; color: white; padding: 15px 30px; border: none; border-radius: 5px; cursor: pointer; font-size: 16px; }
+        .button:hover { background: #45a049; }
+        .result { margin-top: 20px; padding: 15px; border-radius: 5px; }
+        .success { background: #e8f5e8; }
+        .error { background: #ffe8e8; }
+    </style>
+</head>
+<body>
+    <h1>🍽️ Serenity Email Capture Test</h1>
+    
+    <p><strong>Test Phone:</strong> 404-555-TEST</p>
+    <p><strong>Target Emails:</strong> donvon@vonbase.com & support@vonbase.com</p>
+    <p><strong>Service:</strong> SMTP2GO Direct API</p>
+    
+    <button class="button" onclick="testEmailCapture()">🧪 Send Test Email</button>
+    
+    <div id="result"></div>
+    
+    <script>
+        function testEmailCapture() {
+            const resultDiv = document.getElementById('result');
+            resultDiv.innerHTML = '<p>📧 Sending test email...</p>';
+            
+            const testPhone = '404-555-TEST';
+            
+            fetch('https://api.smtp2go.com/v3/email/send', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    "api_key": "api-F7FC4178E29740E0878A2922145140F4",
+                    "to": ["donvon@vonbase.com", "support@vonbase.com"],
+                    "sender": "donvon@vonbase.com",
+                    "subject": `🧪 TEST: Serenity Customer: ${testPhone}`,
+                    "text_body": `DEPLOYMENT TEST - Serenity Atlanta QR Menu
+
+📱 Phone: ${testPhone}
+⏰ Time: ${new Date().toLocaleString()}
+📱 Device: Test Browser
+🌐 Source: Deployment Test
+
+✅ This confirms the live deployment is working!
+
+The Serenity QR menu email capture system is operational and ready to capture real customers.
+
+---
+Serenity QR Menu System
+Powered by VBE
+Live Deployment Test`
+                })
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log('Test response:', data);
+                
+                if (data.data && data.data.succeeded > 0) {
+                    resultDiv.innerHTML = `
+                        <div class="result success">
+                            <h3>✅ SUCCESS!</h3>
+                            <p>Test email sent to both addresses:</p>
+                            <ul>
+                                <li>donvon@vonbase.com ✅</li>
+                                <li>support@vonbase.com ✅</li>
+                            </ul>
+                            <p><strong>Emails sent:</strong> ${data.data.succeeded}</p>
+                            <p><strong>System Status:</strong> OPERATIONAL</p>
+                        </div>
+                    `;
+                } else {
+                    resultDiv.innerHTML = `
+                        <div class="result error">
+                            <h3>❌ Test Failed</h3>
+                            <p>Response: ${JSON.stringify(data)}</p>
+                        </div>
+                    `;
+                }
+            })
+            .catch(error => {
+                resultDiv.innerHTML = `
+                    <div class="result error">
+                        <h3>❌ Connection Error</h3>
+                        <p>${error.message}</p>
+                    </div>
+                `;
+            });
+        }
+    </script>
+</body>
+</html>
